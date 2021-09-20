@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GitHub } from "@material-ui/icons";
 import { Skeleton } from "@material-ui/lab";
 import { ILinkPage } from "../../Pages/LinkCreation/LinkCreation";
 import { useStyles } from "./styles";
+import { getGithubData } from "../../utils/getGithubData";
 
 export const CardPreview: React.FC<ILinkPage> = ({
   repositoryName,
@@ -11,6 +12,19 @@ export const CardPreview: React.FC<ILinkPage> = ({
   color,
 }) => {
   const classes = useStyles();
+  const [githubData, setGithubData] = useState<any>(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const fetchedData = await getGithubData(userName, repositoryName);
+        setGithubData(fetchedData.data);
+      } catch (e) {}
+    };
+    if (repositoryName && userName && icon) {
+      getData();
+    }
+  }, [userName, repositoryName, icon]);
   return (
     <div className={classes.card}>
       <div
