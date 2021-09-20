@@ -1,8 +1,9 @@
 import React from "react";
 import { Formik, FormikProps } from "formik";
 import * as Yup from "yup";
+import { FormComponent } from "../../components/FormComponent/FormComponent";
 
-export interface ILinkForm {
+export interface ILinkPage {
   userName: string;
   repositoryName: string;
   color: string;
@@ -23,7 +24,7 @@ const LinkCreation: React.FunctionComponent = () => {
         color: "#FF5C5C",
         icon: "",
       }}
-      onSubmit={(values: ILinkForm, actions) => {
+      onSubmit={(values: ILinkPage, actions) => {
         console.log(values);
         setTimeout(() => {
           actions.setSubmitting(false);
@@ -33,12 +34,12 @@ const LinkCreation: React.FunctionComponent = () => {
         repositoryName: Yup.string().required("Enter enter repository name"),
         userName: Yup.string().required("Please enter full user name"),
         color: Yup.string().required("Please select the color"),
-        icon: Yup.string().required(
+        /*      icon: Yup.string().required(
           "Please first select the icon for repository"
-        ),
+        ), */
       })}
     >
-      {(props: FormikProps<ILinkForm>) => <div>"component here"</div>}
+      {(props: FormikProps<ILinkPage>) => <FormComponent {...props} />}
     </Formik>
   );
 };
