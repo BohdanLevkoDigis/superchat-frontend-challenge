@@ -12,12 +12,14 @@ import { CardPreview } from "../CardPreview/CardPreview";
 export interface IFormComponentProps extends FormikProps<ILinkPage> {
   displayFormStatus: boolean;
   formStatus: IFormStatus;
+  createdLink?: string;
 }
 
 export const FormComponent: React.FC<IFormComponentProps> = ({
   setFieldValue,
   formStatus,
   displayFormStatus,
+  createdLink,
   ...props
 }) => {
   const classes = useStyles();
@@ -137,11 +139,11 @@ export const FormComponent: React.FC<IFormComponentProps> = ({
                   <p className={classes.creationFormErrorMessage}>
                     {formStatus.message}
                   </p>
-                ) : formStatus.type === "success" ? (
+                ) : (
                   <p className={classes.creationFormSuccessMessage}>
-                    {formStatus.message}
+                    {`Your generated link: ${createdLink}`}
                   </p>
-                ) : null}
+                )}
               </div>
             )}
           </Grid>

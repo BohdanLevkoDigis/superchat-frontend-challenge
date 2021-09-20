@@ -5,18 +5,6 @@ const octokit = new Octokit();
 
 const API_URL = "http://localhost:5000";
 
-export type Owner = {
-  id: string;
-  avatar: string;
-};
-
-export type Repository = {
-  name: string;
-  owner: Owner;
-  stars: number;
-  topContributors: string[];
-};
-
 export const API = axios.create({
   baseURL: `${API_URL}/api`,
   responseType: "json",
@@ -33,3 +21,20 @@ export const getGithubData = async (
 
   return githubData;
 };
+
+export async function getRepoContributors(
+  userName: string,
+  repositoryName: string
+): Promise<any> {
+  try {
+    const contributorsData = await octokit.repos.getContributorsStats({
+      owner: userName,
+      repo: repositoryName,
+    });
+    if (contributorsData.status === 200) {
+      return contributorsData.data;
+    }
+  } catch (e) {
+    return null;
+  }
+}

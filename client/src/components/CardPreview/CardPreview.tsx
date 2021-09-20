@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { GitHub } from "@material-ui/icons";
-import { Skeleton } from "@material-ui/lab";
+import { Rating, Skeleton } from "@material-ui/lab";
 import { ILinkPage } from "../../Pages/LinkCreation/LinkCreation";
 import { useStyles } from "./styles";
-import { getGithubData } from "../../utils/API";
 
 export const CardPreview: React.FC<ILinkPage> = ({
   repositoryName,
@@ -12,19 +11,6 @@ export const CardPreview: React.FC<ILinkPage> = ({
   color,
 }) => {
   const classes = useStyles();
-  const [githubData, setGithubData] = useState<any>(null);
-
-  /*   useEffect(() => {
-    const getData = async () => {
-      try {
-        const fetchedData = await getGithubData(userName, repositoryName);
-        setGithubData(fetchedData.data);
-      } catch (e) {}
-    };
-    if (repositoryName && userName && icon) {
-      getData();
-    }
-  }, [userName, repositoryName, icon]); */
   return (
     <div className={classes.card}>
       <div
@@ -56,7 +42,14 @@ export const CardPreview: React.FC<ILinkPage> = ({
             Title: <span className={classes.cardSubText}>{repositoryName}</span>
           </div>
           <div className={classes.cardRepositoryDescription}>Description</div>
-          <div className={classes.cardRepositoryStars}>Stars</div>
+          <div className={classes.cardRepositoryStars}>
+            Stars:
+            <Rating
+              disabled
+              value={3}
+              className={classes.cardRepositoryRating}
+            />
+          </div>
           <div className={classes.cardRepositoryContributors}>Contributors</div>
           <div className={classes.cardRepositoryStars}>Star the repo</div>
         </div>

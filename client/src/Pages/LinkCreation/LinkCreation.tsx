@@ -22,6 +22,10 @@ interface IFormStatusProps {
   [key: string]: IFormStatus;
 }
 
+export interface ISuccessResponse extends ILinkPage {
+  _id: string;
+}
+
 const formStatusProps: IFormStatusProps = {
   success: {
     message: "Link added successfully.",
@@ -39,6 +43,7 @@ const LinkCreation: React.FunctionComponent = () => {
     type: "",
   });
   const [displayFormStatus, setDisplayFormStatus] = useState(false);
+  const [createdLink, setCreatedLink] = useState("");
 
   const addNewRepoLink = async (
     values: ILinkPage,
@@ -47,9 +52,11 @@ const LinkCreation: React.FunctionComponent = () => {
     try {
       actions.setSubmitting(true);
       const data: FormData = dataToFormData(values);
-      const addProductStatus = await sendRepoLinkAddForm(data);
-      if (addProductStatus.message.includes("created")) {
+      const addRepoLinkStatus: ISuccessResponse | any =
+        await sendRepoLinkAddForm(data);
+      if (addRepoLinkStatus) {
         setFormStatus(formStatusProps.success);
+        setCreatedLink(`http://localhost:5000/${addRepoLinkStatus["_id"]}`);
         actions.resetForm({});
       }
     } catch (error) {
@@ -88,6 +95,7 @@ const LinkCreation: React.FunctionComponent = () => {
           {...props}
           displayFormStatus={displayFormStatus}
           formStatus={formStatus}
+          createdLink={createdLink}
         />
       )}
     </Formik>

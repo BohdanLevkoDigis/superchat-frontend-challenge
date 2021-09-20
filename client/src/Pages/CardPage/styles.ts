@@ -5,12 +5,13 @@ export const useStyles = makeStyles(() =>
     card: {
       width: 320,
       height: "620px",
+      margin: "40px auto",
 
       color: "white",
     },
     cardBody: {
       display: "block",
-      height: "120px",
+      height: "350px",
       padding: 10,
 
       backgroundColor: "#1C1D21",
@@ -54,14 +55,16 @@ export const useStyles = makeStyles(() =>
       display: "flex",
       alignItems: "center",
     },
-    cardRepositoryContributors: {},
+    cardRepositoryContributors: {
+      padding: 0,
+    },
     cardSubText: {
       marginLeft: 5,
       fontStyle: "italic",
     },
     cardRepositoryRating: {
       marginLeft: 5,
-      fontSize: 14,
+      fontSize: 16,
     },
   })
 );

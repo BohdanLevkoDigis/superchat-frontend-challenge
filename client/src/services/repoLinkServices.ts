@@ -9,7 +9,7 @@ export interface IRepoLink {
 }
 
 export interface IRepoLinkAddResponse {
-  message: string;
+  data: IRepoLink;
 }
 
 export const sendRepoLinkAddForm = async (
@@ -23,3 +23,9 @@ export const sendRepoLinkAddForm = async (
   return response.data;
 };
 
+export const getRepoLink = async (
+  id: string
+): Promise<IRepoLinkAddResponse> => {
+  const response = await API.get<IRepoLinkAddResponse>(`/repoLink/${id}`);
+  return response.data;
+};
