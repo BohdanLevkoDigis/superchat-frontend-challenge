@@ -4,13 +4,13 @@ export const useStyles = makeStyles(() =>
   createStyles({
     card: {
       width: 320,
-      height: "600px",
+      height: "620px",
 
       color: "white",
     },
     cardBody: {
       display: "block",
-      height: "330px",
+      height: "350px",
       padding: 10,
 
       backgroundColor: "#1C1D21",

@@ -3,14 +3,21 @@ import { Form, FormikProps } from "formik";
 import { Grid, TextField, Button } from "@material-ui/core";
 import { useDropzone } from "react-dropzone";
 import { useStyles } from "./styles";
-import { ILinkPage } from "../../Pages/LinkCreation/LinkCreation";
+import { IFormStatus, ILinkPage } from "../../Pages/LinkCreation/LinkCreation";
 import { Skeleton } from "@material-ui/lab";
 import { AddPhotoAlternate } from "@material-ui/icons";
 import { GithubPicker } from "react-color";
 import { CardPreview } from "../CardPreview/CardPreview";
 
-export const FormComponent: React.FC<FormikProps<ILinkPage>> = ({
+export interface IFormComponentProps extends FormikProps<ILinkPage> {
+  displayFormStatus: boolean;
+  formStatus: IFormStatus;
+}
+
+export const FormComponent: React.FC<IFormComponentProps> = ({
   setFieldValue,
+  formStatus,
+  displayFormStatus,
   ...props
 }) => {
   const classes = useStyles();
@@ -124,6 +131,19 @@ export const FormComponent: React.FC<FormikProps<ILinkPage>> = ({
             >
               Submit
             </Button>
+            {displayFormStatus && (
+              <div className={classes.creationFormStatus}>
+                {formStatus.type === "error" ? (
+                  <p className={classes.creationFormErrorMessage}>
+                    {formStatus.message}
+                  </p>
+                ) : formStatus.type === "success" ? (
+                  <p className={classes.creationFormSuccessMessage}>
+                    {formStatus.message}
+                  </p>
+                ) : null}
+              </div>
+            )}
           </Grid>
         </Grid>
       </Form>

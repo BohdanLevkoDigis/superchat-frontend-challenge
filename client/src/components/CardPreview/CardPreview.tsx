@@ -3,7 +3,7 @@ import { GitHub } from "@material-ui/icons";
 import { Skeleton } from "@material-ui/lab";
 import { ILinkPage } from "../../Pages/LinkCreation/LinkCreation";
 import { useStyles } from "./styles";
-import { getGithubData } from "../../utils/getGithubData";
+import { getGithubData } from "../../utils/API";
 
 export const CardPreview: React.FC<ILinkPage> = ({
   repositoryName,
@@ -14,7 +14,7 @@ export const CardPreview: React.FC<ILinkPage> = ({
   const classes = useStyles();
   const [githubData, setGithubData] = useState<any>(null);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const getData = async () => {
       try {
         const fetchedData = await getGithubData(userName, repositoryName);
@@ -24,7 +24,7 @@ export const CardPreview: React.FC<ILinkPage> = ({
     if (repositoryName && userName && icon) {
       getData();
     }
-  }, [userName, repositoryName, icon]);
+  }, [userName, repositoryName, icon]); */
   return (
     <div className={classes.card}>
       <div

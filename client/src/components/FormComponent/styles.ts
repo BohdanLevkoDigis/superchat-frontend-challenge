@@ -17,7 +17,7 @@ export const useStyles = makeStyles(() =>
 
     creationForm: {
       width: 450,
-      height: "600px",
+      height: "620px",
 
       borderRadius: 15,
       boxShadow:
@@ -47,9 +47,14 @@ export const useStyles = makeStyles(() =>
     creationFormSubmitButton: {
       display: "block",
       width: "50%",
-      margin: "48px auto 0",
+      margin: "48px auto 10px",
     },
-    /*     creationFormSuccessMessage: { color: "green" },
-    creationFormErrorMessage: { color: "red" }, */
+    creationFormStatus: {
+      display: "block",
+      marginBottom: 20,
+      textAlign: "center",
+    },
+    creationFormSuccessMessage: { color: "green" },
+    creationFormErrorMessage: { color: "red" },
   })
 );

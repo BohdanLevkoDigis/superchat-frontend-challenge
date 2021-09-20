@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 router.post(
   "/",
-  upload.single("icon"),
+  upload.array("icon", 1),
   [
     check("userName", "Enter valid user name").isLength({
       min: 3,

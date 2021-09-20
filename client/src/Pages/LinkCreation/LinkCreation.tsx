@@ -1,7 +1,10 @@
-import React from "react";
-import { Formik, FormikProps } from "formik";
+import React, { useState } from "react";
+import { AxiosError } from "axios";
+import { Formik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { FormComponent } from "../../components/FormComponent/FormComponent";
+import { dataToFormData } from "../../utils/dataToFormData";
+import { sendRepoLinkAddForm } from "../../services/repoLinkServices";
 
 export interface ILinkPage {
   userName: string;
@@ -15,7 +18,53 @@ export interface IFormStatus {
   type: string;
 }
 
+interface IFormStatusProps {
+  [key: string]: IFormStatus;
+}
+
+const formStatusProps: IFormStatusProps = {
+  success: {
+    message: "Link added successfully.",
+    type: "success",
+  },
+  error: {
+    message: "Something went wrong. Please try again.",
+    type: "error",
+  },
+};
+
 const LinkCreation: React.FunctionComponent = () => {
+  const [formStatus, setFormStatus] = useState<IFormStatus>({
+    message: "",
+    type: "",
+  });
+  const [displayFormStatus, setDisplayFormStatus] = useState(false);
+
+  const addNewRepoLink = async (
+    values: ILinkPage,
+    actions: FormikHelpers<ILinkPage>
+  ) => {
+    try {
+      actions.setSubmitting(true);
+      const data: FormData = dataToFormData(values);
+      const addProductStatus = await sendRepoLinkAddForm(data);
+      if (addProductStatus.message.includes("created")) {
+        setFormStatus(formStatusProps.success);
+        actions.resetForm({});
+      }
+    } catch (error) {
+      actions.setSubmitting(false);
+      if (!(error as AxiosError).response) {
+        setFormStatus(formStatusProps.error);
+
+        return;
+      }
+      setFormStatus(formStatusProps.error);
+    } finally {
+      setDisplayFormStatus(true);
+    }
+  };
+
   return (
     <Formik
       initialValues={{
@@ -24,12 +73,7 @@ const LinkCreation: React.FunctionComponent = () => {
         color: "#FF5C5C",
         icon: "",
       }}
-      onSubmit={(values: ILinkPage, actions) => {
-        console.log(values);
-        setTimeout(() => {
-          actions.setSubmitting(false);
-        }, 500);
-      }}
+      onSubmit={addNewRepoLink}
       validationSchema={Yup.object().shape({
         repositoryName: Yup.string().required("Enter enter repository name"),
         userName: Yup.string().required("Please enter full user name"),
@@ -39,7 +83,13 @@ const LinkCreation: React.FunctionComponent = () => {
         ), */
       })}
     >
-      {(props: FormikProps<ILinkPage>) => <FormComponent {...props} />}
+      {(props) => (
+        <FormComponent
+          {...props}
+          displayFormStatus={displayFormStatus}
+          formStatus={formStatus}
+        />
+      )}
     </Formik>
   );
 };
