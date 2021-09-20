@@ -7,6 +7,7 @@ import { ILinkPage } from "../../Pages/LinkCreation/LinkCreation";
 import { Skeleton } from "@material-ui/lab";
 import { AddPhotoAlternate } from "@material-ui/icons";
 import { GithubPicker } from "react-color";
+import { CardPreview } from "../CardPreview/CardPreview";
 
 export const FormComponent: React.FC<FormikProps<ILinkPage>> = ({
   setFieldValue,
@@ -126,6 +127,12 @@ export const FormComponent: React.FC<FormikProps<ILinkPage>> = ({
           </Grid>
         </Grid>
       </Form>
+      <CardPreview
+        repositoryName={values.repositoryName}
+        userName={values.userName}
+        color={values.color}
+        icon={files[0] ? URL.createObjectURL(files[0]) : ""}
+      />
     </div>
   );
 };

@@ -10,17 +10,16 @@ export const useStyles = makeStyles(() =>
 
       gap: 80,
       margin: "0 auto",
-      padding: "40px 0",
+      padding: "40px 20px",
 
       color: "#707172",
     },
 
     creationForm: {
       width: 450,
-      height: 600,
+      height: "600px",
 
       borderRadius: 15,
-
       boxShadow:
         "rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset",
     },
@@ -50,7 +49,7 @@ export const useStyles = makeStyles(() =>
       width: "50%",
       margin: "48px auto 0",
     },
-/*     creationFormSuccessMessage: { color: "green" },
+    /*     creationFormSuccessMessage: { color: "green" },
     creationFormErrorMessage: { color: "red" }, */
   })
 );
