@@ -1,2 +1,0 @@
-# superchat-frontend-challenge
-
