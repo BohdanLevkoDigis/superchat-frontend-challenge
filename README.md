@@ -21,7 +21,13 @@ The next thing will be to install all the dependencies of the project.
 npm i && cd client && npm i
 ```
 
-Once the dependencies are installed, you can now start the project
+Once the dependencies are installed, add a directory in the root folder "config" , add configuration file "default.json" ( you can use example {
+  "port": 5000,
+  "mongoUrl": "mongodb+srv://admin:dfcpassword@cluster0.fdxei.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+}
+)
+
+Now you a ready to go!
 
 ### 1.3 Launch and discover
 
