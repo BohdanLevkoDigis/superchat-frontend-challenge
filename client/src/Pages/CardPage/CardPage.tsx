@@ -12,7 +12,11 @@ import {
 } from "@material-ui/icons";
 import { Rating, Skeleton } from "@material-ui/lab";
 import { useStyles } from "./styles";
-import { getGithubData, getRepoContributors, IContributor } from "../../utils/API";
+import {
+  getGithubData,
+  getRepoContributors,
+  IContributor,
+} from "../../utils/API";
 import { getRepoLink, IRepoLink } from "../../services/repoLinkServices";
 import ListItem from "@material-ui/core/ListItem";
 import List from "@material-ui/core/List";
@@ -120,11 +124,9 @@ export const CardPage: React.FC = () => {
                   <div className={classes.cardRepositoryStars}>
                     <Grade className={classes.cardRepositoryItemIcon} />
                     Stars:
-                    <Rating
-                      value={githubData.stargazers_count}
-                      className={classes.cardRepositoryRating}
-                      disabled
-                    />
+                    <span className={classes.cardSubText}>
+                      {githubData.stargazers_count}
+                    </span>
                   </div>
                   <List>
                     <ListItem
