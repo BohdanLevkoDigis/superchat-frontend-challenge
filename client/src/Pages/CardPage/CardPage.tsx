@@ -11,13 +11,12 @@ import {
   Title,
 } from "@material-ui/icons";
 import { Rating, Skeleton } from "@material-ui/lab";
-import {
-  ILinkPage,
-  ISuccessResponse,
-} from "../../Pages/LinkCreation/LinkCreation";
 import { useStyles } from "./styles";
 import { getGithubData, getRepoContributors } from "../../utils/API";
-import { getRepoLink } from "../../services/repoLinkServices";
+import {
+  getRepoLink,
+  IRepoLink,
+} from "../../services/repoLinkServices";
 import ListItem from "@material-ui/core/ListItem";
 import List from "@material-ui/core/List";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -25,11 +24,19 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
 import travolta from "../../assets/images/travolta.gif";
 
+interface Author {
+  login: string;
+}
+
+interface Contributor {
+  author: Author;
+}
+
 export const CardPage: React.FC = () => {
   const classes = useStyles();
   const [githubData, setGithubData] = useState<any>(null);
-  const [cardData, setCardData] = useState<ILinkPage | null>(null);
-  const [repoContributors, setRepoContributors] = useState<any>(null);
+  const [cardData, setCardData] = useState<IRepoLink | null>(null);
+  const [repoContributors, setRepoContributors] = useState<string[] | []>([]);
   const [listOpen, setListOpen] = useState(true);
   const currentLocation = window.location.href.split("/")[3];
 
@@ -40,9 +47,7 @@ export const CardPage: React.FC = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const findBdData: ISuccessResponse | any = await getRepoLink(
-          currentLocation
-        );
+        const findBdData: IRepoLink | any = await getRepoLink(currentLocation);
         if (findBdData) {
           setCardData(findBdData);
           const fetchedGitData = await getGithubData(
@@ -56,10 +61,9 @@ export const CardPage: React.FC = () => {
           setRepoContributors(
             contriButorsData
               .slice(0, 10)
-              .map((contributor: any) => contributor.author.login)
+              .map((contributor: Contributor) => contributor.author.login)
           );
           setGithubData(fetchedGitData.data);
-          console.log(repoContributors);
         }
       } catch (e) {}
     };

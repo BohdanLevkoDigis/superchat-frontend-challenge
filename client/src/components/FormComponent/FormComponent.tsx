@@ -15,6 +15,10 @@ export interface IFormComponentProps extends FormikProps<ILinkPage> {
   createdLink?: string;
 }
 
+interface Color {
+  hex: string;
+}
+
 export const FormComponent: React.FC<IFormComponentProps> = ({
   setFieldValue,
   formStatus,
@@ -99,7 +103,7 @@ export const FormComponent: React.FC<IFormComponentProps> = ({
             <div className={classes.creationFormSubTitle}>Pick color</div>
             <GithubPicker
               className={classes.creationFormColorPicker}
-              onChangeComplete={(color: any) =>
+              onChangeComplete={(color: Color) =>
                 setFieldValue("color", color.hex)
               }
             />
