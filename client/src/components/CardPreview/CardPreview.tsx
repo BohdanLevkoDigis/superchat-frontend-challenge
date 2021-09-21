@@ -37,7 +37,11 @@ export const CardPreview: React.FC<ILinkPage> = ({
         {!icon ? (
           <Skeleton variant="circle" className={classes.cardRepositoryIcon} />
         ) : (
-          <img alt="hello" className={classes.cardRepositoryIcon} src={icon} />
+          <img
+            alt="repository-icon"
+            className={classes.cardRepositoryIcon}
+            src={icon}
+          />
         )}
         <div className={classes.cardRepositoryAuthor}>
           Author: <span className={classes.cardTitleText}>{userName}</span>

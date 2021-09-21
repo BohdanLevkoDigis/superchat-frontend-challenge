@@ -12,24 +12,18 @@ import {
 } from "@material-ui/icons";
 import { Rating, Skeleton } from "@material-ui/lab";
 import { useStyles } from "./styles";
-import { getGithubData, getRepoContributors } from "../../utils/API";
-import {
-  getRepoLink,
-  IRepoLink,
-} from "../../services/repoLinkServices";
+import { getGithubData, getRepoContributors, IContributor } from "../../utils/API";
+import { getRepoLink, IRepoLink } from "../../services/repoLinkServices";
 import ListItem from "@material-ui/core/ListItem";
 import List from "@material-ui/core/List";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
 import travolta from "../../assets/images/travolta.gif";
+import { useParams } from "react-router";
 
-interface Author {
-  login: string;
-}
-
-interface Contributor {
-  author: Author;
+interface Params {
+  linkId: string;
 }
 
 export const CardPage: React.FC = () => {
@@ -38,16 +32,16 @@ export const CardPage: React.FC = () => {
   const [cardData, setCardData] = useState<IRepoLink | null>(null);
   const [repoContributors, setRepoContributors] = useState<string[] | []>([]);
   const [listOpen, setListOpen] = useState(true);
-  const currentLocation = window.location.href.split("/")[3];
+  const { linkId }: Params = useParams();
 
   const handleClick = () => {
-    setListOpen(!listOpen);
+    setListOpen((prevState) => !prevState);
   };
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const findBdData: IRepoLink | any = await getRepoLink(currentLocation);
+        const findBdData: IRepoLink = await getRepoLink(linkId);
         if (findBdData) {
           setCardData(findBdData);
           const fetchedGitData = await getGithubData(
@@ -61,14 +55,14 @@ export const CardPage: React.FC = () => {
           setRepoContributors(
             contriButorsData
               .slice(0, 10)
-              .map((contributor: Contributor) => contributor.author.login)
+              .map((contributor: IContributor) => contributor.author.login)
           );
           setGithubData(fetchedGitData.data);
         }
       } catch (e) {}
     };
     getData();
-  }, [currentLocation, repoContributors]);
+  }, [linkId, repoContributors]);
   return (
     <div className={classes.card}>
       {cardData && (
@@ -93,7 +87,7 @@ export const CardPage: React.FC = () => {
               />
             ) : (
               <img
-                alt="hello"
+                alt="repository-icon"
                 className={classes.cardRepositoryIcon}
                 src={`http://localhost:5000${cardData.icon}`}
               />

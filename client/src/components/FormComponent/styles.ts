@@ -1,6 +1,6 @@
 import { createStyles, makeStyles } from "@material-ui/core";
 
-export const useStyles = makeStyles(() =>
+export const useStyles = makeStyles((theme) =>
   createStyles({
     container: {
       display: "flex",
@@ -13,7 +13,7 @@ export const useStyles = makeStyles(() =>
       padding: "40px 20px",
 
       color: "#707172",
-      "@media (max-width:600px)": {
+      [theme.breakpoints.down("sm")]: {
         gap: 20,
         flexDirection: "column",
         justifyContent: "flex-start",
@@ -27,7 +27,7 @@ export const useStyles = makeStyles(() =>
       borderRadius: 15,
       boxShadow:
         "rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset",
-      "@media (max-width:600px)": {
+      [theme.breakpoints.down("sm")]: {
         width: "100%",
       },
     },

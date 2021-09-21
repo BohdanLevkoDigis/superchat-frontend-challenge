@@ -1,12 +1,12 @@
 import { createStyles, makeStyles } from "@material-ui/core";
 
-export const useStyles = makeStyles(() =>
+export const useStyles = makeStyles((theme) =>
   createStyles({
     card: {
       width: 320,
 
       color: "white",
-      "@media (max-width:600px)": {
+      [theme.breakpoints.down("sm")]: {
         width: "100%",
       },
     },

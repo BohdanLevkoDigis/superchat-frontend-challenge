@@ -7,7 +7,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/" component={LinkCreation} />
-        <Route path="/" component={CardPage} />
+        <Route path="/:linkId" component={CardPage} />
       </Switch>
     </Router>
   );

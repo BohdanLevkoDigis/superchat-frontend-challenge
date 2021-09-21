@@ -8,14 +8,15 @@ export interface IRepoLink {
   icon: string;
 }
 
-export interface IRepoLinkAddResponse {
+export interface IRepoLinkResponse extends IRepoLink {
   data: IRepoLink;
 }
 
+
 export const sendRepoLinkAddForm = async (
   data: FormData
-): Promise<IRepoLinkAddResponse> => {
-  const response = await API.post<IRepoLinkAddResponse>("/repoLink", data, {
+): Promise<IRepoLinkResponse> => {
+  const response = await API.post<IRepoLinkResponse>("/repoLink", data, {
     headers: {
       "Content-Type": "blobData",
     },
@@ -23,9 +24,7 @@ export const sendRepoLinkAddForm = async (
   return response.data;
 };
 
-export const getRepoLink = async (
-  id: string
-): Promise<IRepoLinkAddResponse> => {
-  const response = await API.get<IRepoLinkAddResponse>(`/repoLink/${id}`);
+export const getRepoLink = async (id: string): Promise<IRepoLinkResponse> => {
+  const response = await API.get<IRepoLinkResponse>(`/repoLink/${id}`);
   return response.data;
 };

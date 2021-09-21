@@ -1,6 +1,14 @@
 import { Octokit } from "@octokit/rest";
 import axios from "axios";
 
+interface IAuthor {
+  login: string;
+}
+
+export interface IContributor {
+  author: IAuthor;
+}
+
 const octokit = new Octokit();
 
 const API_URL = "http://localhost:5000";
