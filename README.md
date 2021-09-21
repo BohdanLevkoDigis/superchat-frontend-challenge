@@ -37,6 +37,14 @@ add your config to default.json, or use example below:
   "mongoUrl": "mongodb+srv://admin:dfcpassword@cluster0.fdxei.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }
 ```
+Create folder in root 
+```sh
+uploads
+```
+Create folder inside uploads
+```sh
+repoIcons
+```
 
 Now you a ready to go!
 
