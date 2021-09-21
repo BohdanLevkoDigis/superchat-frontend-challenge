@@ -21,14 +21,22 @@ The next thing will be to install all the dependencies of the project.
 npm i && cd client && npm i
 ```
 
-Once the dependencies are installed, add a directory in the root folder "config" , add configuration file "default.json" ( you can use example
+Once the dependencies are installed, add a directory in the root folder 
+```sh
+config
+```
+add configuration file inside config 
+
+```sh
+"default.json" 
+```
+add you config do default json, or use example below:
 ```sh
 {
   "port": 5000,
   "mongoUrl": "mongodb+srv://admin:dfcpassword@cluster0.fdxei.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }
 ```
-)
 
 Now you a ready to go!
 
