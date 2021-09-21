@@ -28,9 +28,9 @@ config
 add configuration file inside config 
 
 ```sh
-"default.json" 
+default.json
 ```
-add you config do default json, or use example below:
+add your config to default.json, or use example below:
 ```sh
 {
   "port": 5000,
