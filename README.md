@@ -47,11 +47,10 @@ You are now ready to launch the application using the command below.
 ```sh
 npm run dev
 ```
-```
 
 You can now head to `http://localhost:3000/` and see the SPA. 
 
-## 2. Project structure
+### 2. Project structure
 
 This template was made with a well-defined directory structure.
 
