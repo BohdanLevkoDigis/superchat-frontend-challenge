@@ -56,7 +56,7 @@ const LinkCreation: React.FunctionComponent = () => {
         await sendRepoLinkAddForm(data);
       if (addRepoLinkStatus) {
         setFormStatus(formStatusProps.success);
-        setCreatedLink(`http://localhost:5000/${addRepoLinkStatus["_id"]}`);
+        setCreatedLink(`http://localhost:3000/${addRepoLinkStatus["_id"]}`);
         actions.resetForm({});
       }
     } catch (error) {
@@ -85,9 +85,6 @@ const LinkCreation: React.FunctionComponent = () => {
         repositoryName: Yup.string().required("Enter enter repository name"),
         userName: Yup.string().required("Please enter full user name"),
         color: Yup.string().required("Please select the color"),
-        /*      icon: Yup.string().required(
-          "Please first select the icon for repository"
-        ), */
       })}
     >
       {(props) => (

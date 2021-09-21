@@ -13,7 +13,7 @@ const repoLinkController = new RepoLinkController();
 
 const storage = multer.diskStorage({
   destination: (req, file: Express.Multer.File, callback: any) => {
-    callback(null, path.resolve(__dirname, "../../uploads/repoIcons/"));
+    callback(null, path.resolve(__dirname, "../../uploads/repoIcons"));
   },
   filename: (req, file: Express.Multer.File, callback: any) => {
     callback(null, hashFileName(file.originalname));
@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 router.post(
   "/",
-  upload.array("icon", 1),
+  upload.array("icon[]", 1),
   [
     check("userName", "Enter valid user name").isLength({
       min: 3,
@@ -35,4 +35,5 @@ router.post(
   requestWrapper(repoLinkController.createLink, StatusCodes.CREATED)
 );
 
+router.get("/:id", requestWrapper(repoLinkController.getLink));
 module.exports = router;

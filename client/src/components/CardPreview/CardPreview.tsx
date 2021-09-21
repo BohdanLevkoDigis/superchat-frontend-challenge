@@ -1,5 +1,12 @@
 import React from "react";
-import { GitHub } from "@material-ui/icons";
+import {
+  Description,
+  GitHub,
+  People,
+  Star,
+  ThumbsUpDown,
+  Title,
+} from "@material-ui/icons";
 import { Rating, Skeleton } from "@material-ui/lab";
 import { ILinkPage } from "../../Pages/LinkCreation/LinkCreation";
 import { useStyles } from "./styles";
@@ -33,16 +40,21 @@ export const CardPreview: React.FC<ILinkPage> = ({
           <img alt="hello" className={classes.cardRepositoryIcon} src={icon} />
         )}
         <div className={classes.cardRepositoryAuthor}>
-          Author: <span className={classes.cardSubText}>{userName}</span>
+          Author: <span className={classes.cardTitleText}>{userName}</span>
         </div>
       </div>
       <div className={classes.cardBody}>
         <div className={classes.cardRepository}>
-          <div className={classes.cardRepositoryTitle}>
+          <div className={classes.cardRepositoryItem}>
+            <Title className={classes.cardRepositoryItemIcon} />
             Title: <span className={classes.cardSubText}>{repositoryName}</span>
           </div>
-          <div className={classes.cardRepositoryDescription}>Description</div>
+          <div className={classes.cardRepositoryItem}>
+            <Description className={classes.cardRepositoryItemIcon} />
+            Description
+          </div>
           <div className={classes.cardRepositoryStars}>
+            <Star className={classes.cardRepositoryItemIcon} />
             Stars:
             <Rating
               disabled
@@ -50,8 +62,14 @@ export const CardPreview: React.FC<ILinkPage> = ({
               className={classes.cardRepositoryRating}
             />
           </div>
-          <div className={classes.cardRepositoryContributors}>Contributors</div>
-          <div className={classes.cardRepositoryStars}>Star the repo</div>
+          <div className={classes.cardRepositoryItem}>
+            <People className={classes.cardRepositoryItemIcon} />
+            Contributors
+          </div>
+          <div className={classes.cardRepositoryItem}>
+            <ThumbsUpDown className={classes.cardRepositoryItemIcon} />
+            Rate the repo
+          </div>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ export const useStyles = makeStyles(() =>
   createStyles({
     container: {
       display: "flex",
-      alignItems: "center",
+      alignItems: "flex-start",
       justifyContent: "center",
       maxWidth: 1200,
 
@@ -13,15 +13,23 @@ export const useStyles = makeStyles(() =>
       padding: "40px 20px",
 
       color: "#707172",
+      "@media (max-width:600px)": {
+        gap: 20,
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        alignItems: "center",
+      },
     },
 
     creationForm: {
       width: 450,
-      height: "620px",
 
       borderRadius: 15,
       boxShadow:
         "rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset",
+      "@media (max-width:600px)": {
+        width: "100%",
+      },
     },
 
     creationFormTitle: { paddingTop: 20, textAlign: "center" },
@@ -48,6 +56,10 @@ export const useStyles = makeStyles(() =>
       display: "block",
       width: "50%",
       margin: "48px auto 10px",
+    },
+    creationFormCopyButton: {
+      width: "50%",
+      color: "white",
     },
     creationFormStatus: {
       display: "block",

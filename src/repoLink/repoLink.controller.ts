@@ -8,7 +8,6 @@ export interface ICreateBody {
   userName: string;
   repositoryName: string;
   color: string;
-  link: string;
 }
 
 export interface IRepositoryIconImage {
@@ -24,16 +23,21 @@ export class RepoLinkController {
         errors.array()
       );
     }
-    const { userName, repositoryName, color, link } = req.body;
+    const { userName, repositoryName, color } = req.body;
     const icon = (req.files as Express.Multer.File[]).map(
-      (file: IRepositoryIconImage) => `/uploads/productsImages/${file.filename}`
+      (file: IRepositoryIconImage) => `/uploads/repoIcons/${file.filename}`
     );
     return repositoryLinkService.createLink(
       userName,
       repositoryName,
       color,
-      icon[0],
-      link
+      icon[0]
     );
+  }
+
+  getLink(req: Request): Promise<IRepoLink> {
+    const repoLinkId = req.params.id;
+
+    return repositoryLinkService.getRepoLinkById(repoLinkId);
   }
 }

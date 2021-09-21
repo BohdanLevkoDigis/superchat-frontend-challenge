@@ -4,13 +4,14 @@ export const useStyles = makeStyles(() =>
   createStyles({
     card: {
       width: 320,
-      height: "620px",
 
       color: "white",
+      "@media (max-width:600px)": {
+        width: "100%",
+      },
     },
     cardBody: {
       display: "block",
-      height: "120px",
       padding: 10,
 
       backgroundColor: "#1C1D21",
@@ -48,13 +49,20 @@ export const useStyles = makeStyles(() =>
     cardRepositoryAuthor: {
       marginTop: 15,
     },
-    cardRepositoryTitle: {},
-    cardRepositoryDescription: {},
+    cardRepositoryItem: {
+      display: "flex",
+      alignItems: "center",
+      marginTop: 10,
+    },
+    cardRepositoryItemIcon: {
+      marginRight: 10,
+    },
     cardRepositoryStars: {
       display: "flex",
       alignItems: "center",
+      marginTop: 10,
     },
-    cardRepositoryContributors: {},
+    cardTitleText: { paddingTop: 20, textAlign: "center" },
     cardSubText: {
       marginLeft: 5,
       fontStyle: "italic",

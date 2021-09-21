@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { GitHub } from "@material-ui/icons";
+import {
+  Description,
+  ExpandLess,
+  ExpandMore,
+  GitHub,
+  Grade,
+  People,
+  Person,
+  ThumbsUpDown,
+  Title,
+} from "@material-ui/icons";
 import { Rating, Skeleton } from "@material-ui/lab";
 import {
   ILinkPage,
@@ -8,13 +18,24 @@ import {
 import { useStyles } from "./styles";
 import { getGithubData, getRepoContributors } from "../../utils/API";
 import { getRepoLink } from "../../services/repoLinkServices";
+import ListItem from "@material-ui/core/ListItem";
+import List from "@material-ui/core/List";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Collapse from "@material-ui/core/Collapse";
+import travolta from "../../assets/images/travolta.gif";
 
 export const CardPage: React.FC = () => {
   const classes = useStyles();
   const [githubData, setGithubData] = useState<any>(null);
   const [cardData, setCardData] = useState<ILinkPage | null>(null);
   const [repoContributors, setRepoContributors] = useState<any>(null);
+  const [listOpen, setListOpen] = useState(true);
   const currentLocation = window.location.href.split("/")[3];
+
+  const handleClick = () => {
+    setListOpen(!listOpen);
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -46,7 +67,7 @@ export const CardPage: React.FC = () => {
   }, [currentLocation, repoContributors]);
   return (
     <div className={classes.card}>
-      {cardData ? (
+      {cardData && (
         <>
           <div
             style={{
@@ -75,50 +96,85 @@ export const CardPage: React.FC = () => {
             )}
             <div className={classes.cardRepositoryAuthor}>
               Author:
-              <span className={classes.cardSubText}>
+              <span className={classes.cardTitleText}>
                 {cardData.userName || githubData.owner.login}
               </span>
             </div>
           </div>
           <div className={classes.cardBody}>
             <div className={classes.cardRepository}>
-              <div className={classes.cardRepositoryTitle}>
-                Title:{" "}
+              <div className={classes.cardRepositoryItem}>
+                <Title className={classes.cardRepositoryItemIcon} />
+                Title:
                 <span className={classes.cardSubText}>
                   {cardData.repositoryName || githubData.name}
                 </span>
               </div>
-              {githubData && (
+              {githubData ? (
                 <>
-                  <div className={classes.cardRepositoryDescription}>
+                  <div className={classes.cardRepositoryItem}>
+                    <Description className={classes.cardRepositoryItemIcon} />
                     Description:
                     <span className={classes.cardSubText}>
                       {githubData.description || "No description yet"}
                     </span>
                   </div>
                   <div className={classes.cardRepositoryStars}>
+                    <Grade className={classes.cardRepositoryItemIcon} />
                     Stars:
+                    <Rating
+                      value={githubData.stargazers_count}
+                      className={classes.cardRepositoryRating}
+                      disabled
+                    />
+                  </div>
+                  <List>
+                    <ListItem
+                      className={classes.cardRepositoryList}
+                      onClick={handleClick}
+                      button
+                    >
+                      <People className={classes.cardRepositoryItemIcon} />
+                      Contributors
+                      {listOpen ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                    <Collapse in={listOpen} timeout="auto" unmountOnExit>
+                      <List component="div" disablePadding>
+                        {repoContributors.map((contributor: string) => (
+                          <ListItem button>
+                            <ListItemIcon>
+                              <Person style={{ color: "white" }} />
+                            </ListItemIcon>
+                            <ListItemText primary={contributor} />
+                          </ListItem>
+                        ))}
+                      </List>
+                    </Collapse>
+                  </List>
+
+                  <div className={classes.cardRepositoryStars}>
+                    <ThumbsUpDown className={classes.cardRepositoryItemIcon} />
+                    Rate the repo
                     <Rating
                       value={githubData.stargazers_count}
                       className={classes.cardRepositoryRating}
                     />
                   </div>
-                  <ul className={classes.cardRepositoryContributors}>
-                    Contributors
-                    {repoContributors.map((contributor: string) => (
-                      <li key={contributor}>{contributor}</li>
-                    ))}
-                  </ul>
-                  <div className={classes.cardRepositoryStars}>
-                    Star the repo
-                  </div>
                 </>
+              ) : (
+                <div className={classes.cardRepoNotFound}>
+                  Sorry, no GitHub repo found
+                  <img
+                    src={travolta}
+                    alt="nothing to display"
+                    width="150px"
+                    height="200px"
+                  />
+                </div>
               )}
             </div>
           </div>
         </>
-      ) : (
-        ""
       )}
     </div>
   );

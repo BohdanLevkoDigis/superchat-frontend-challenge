@@ -5,7 +5,7 @@ import { useDropzone } from "react-dropzone";
 import { useStyles } from "./styles";
 import { IFormStatus, ILinkPage } from "../../Pages/LinkCreation/LinkCreation";
 import { Skeleton } from "@material-ui/lab";
-import { AddPhotoAlternate } from "@material-ui/icons";
+import { AddPhotoAlternate, FileCopy } from "@material-ui/icons";
 import { GithubPicker } from "react-color";
 import { CardPreview } from "../CardPreview/CardPreview";
 
@@ -140,9 +140,23 @@ export const FormComponent: React.FC<IFormComponentProps> = ({
                     {formStatus.message}
                   </p>
                 ) : (
-                  <p className={classes.creationFormSuccessMessage}>
-                    {`Your generated link: ${createdLink}`}
-                  </p>
+                  <>
+                    <p className={classes.creationFormSuccessMessage}>
+                      Your link successfully generated
+                    </p>
+                    <Button
+                      type="button"
+                      variant="contained"
+                      color="primary"
+                      startIcon={<FileCopy />}
+                      className={classes.creationFormCopyButton}
+                      onClick={() =>
+                        navigator.clipboard.writeText(`${createdLink}`)
+                      }
+                    >
+                      Copy link
+                    </Button>
+                  </>
                 )}
               </div>
             )}
