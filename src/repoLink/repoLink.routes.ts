@@ -4,6 +4,7 @@ import { requestWrapper } from "../utils/request-wrapper";
 import { RepoLinkController } from "./repoLink.controller";
 import { StatusCodes } from "../utils/status-codes";
 import multer from "multer";
+import fs from "fs";
 import path from "path";
 import { hashFileName } from "../utils/helpers";
 
@@ -13,7 +14,13 @@ const repoLinkController = new RepoLinkController();
 
 const storage = multer.diskStorage({
   destination: (req, file: Express.Multer.File, callback: any) => {
-    callback(null, path.resolve(__dirname, "../../uploads/repoIcons"));
+    const dir = path.resolve(__dirname, "../../uploads/repoIcons")
+
+    if (!fs.existsSync(dir)) {
+      return fs.mkdir(dir, { recursive: true }, (err) => callback(err, dir))
+    }
+    
+    callback(null, dir)
   },
   filename: (req, file: Express.Multer.File, callback: any) => {
     callback(null, hashFileName(file.originalname));

@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { FormComponent } from "../../components/FormComponent/FormComponent";
 import { dataToFormData } from "../../utils/dataToFormData";
 import { sendRepoLinkAddForm } from "../../services/repoLinkServices";
+import { API_URL } from "../../utils/API";
 
 export interface ILinkPage {
   userName: string;
@@ -56,7 +57,7 @@ const LinkCreation: React.FunctionComponent = () => {
         await sendRepoLinkAddForm(data);
       if (addRepoLinkStatus) {
         setFormStatus(formStatusProps.success);
-        setCreatedLink(`http://localhost:3000/${addRepoLinkStatus["_id"]}`);
+        setCreatedLink(`${API_URL}/${addRepoLinkStatus["_id"]}`);
         actions.resetForm({});
       }
     } catch (error) {

@@ -1,5 +1,8 @@
 # superchat-frontend-challenge
+
 ## 1. Getting started
+
+[DEMO](https://superchat-frontend.herokuapp.com/)
 
 ### 1.1 Requirements
 
@@ -11,7 +14,7 @@ Before starting, make sure you have at least those components on your workstatio
 
 Start by cloning this project on your workstation.
 
-``` sh
+```sh
 https://github.com/BohdanLevkoDigis/superchat-frontend-challenge.git
 ```
 
@@ -21,27 +24,35 @@ The next thing will be to install all the dependencies of the project.
 npm i && cd client && npm i
 ```
 
-Once the dependencies are installed, add a directory in the root folder 
+Once the dependencies are installed, add a directory in the root folder
+
 ```sh
 config
 ```
-add configuration file inside config 
+
+add configuration file inside config
 
 ```sh
 default.json
 ```
+
 add your config to default.json, or use example below:
+
 ```sh
 {
   "port": 5000,
   "mongoUrl": "mongodb+srv://admin:dfcpassword@cluster0.fdxei.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }
 ```
-Create folder in root 
+
+Create folder in root
+
 ```sh
 uploads
 ```
+
 Create folder inside uploads
+
 ```sh
 repoIcons
 ```
@@ -56,7 +67,7 @@ You are now ready to launch the application using the command below.
 npm run dev
 ```
 
-You can now head to `http://localhost:3000/` and see the SPA. 
+You can now head to `http://localhost:3000/` and see the SPA.
 
 ### 2. Project structure
 
@@ -69,20 +80,20 @@ src/
 │   ├── utils
 │   ├── services
 │   ├── assets/  # The common assets
-│   ├── components/ 
-│   │   ├── CardPreview/ # Component to preview repo card 
-│   │   │   ├── CardPreview.tsx 
-│   │   │   ├── styles.ts 
+│   ├── components/
+│   │   ├── CardPreview/ # Component to preview repo card
+│   │   │   ├── CardPreview.tsx
+│   │   │   ├── styles.ts
 │   │   ├── FormComponent/  # Form component to receive data from user
-│   │   │   ├── FormComponent.tsx 
-│   │   │   ├── styles.ts 
+│   │   │   ├── FormComponent.tsx
+│   │   │   ├── styles.ts
 │   ├── pages/  # Rendering Pages
 │   │   ├── CardPage/ # Page to render each card
-│   │   │   ├── CardPage.tsx 
-│   │   │   ├── styles.ts 
+│   │   │   ├── CardPage.tsx
+│   │   │   ├── styles.ts
 │   │   ├── LinkCreation/  # Page of creation new link
-│   │   │   ├── LinkCreation.tsx  
-│   │   │   ├── styles.ts 
+│   │   │   ├── LinkCreation.tsx
+│   │   │   ├── styles.ts
 │   └── App.tsx / #Root component
 │   └── App.css
 
@@ -100,7 +111,7 @@ src/
 │   │   ├── repoLink.service.ts
 │   │   ├── repoLink.controler.ts
 │   └── index.ts / #Root component
-│   └── index.d.ts 
+│   └── index.d.ts
 ```
 
 ## 3. Default NPM commands
@@ -109,7 +120,7 @@ The NPM commands below are already included with this template and can be used t
 
 ```sh
 # Start the application server using the ts-node
-npm run server 
+npm run server
 
 # Start the application client
 npm run client

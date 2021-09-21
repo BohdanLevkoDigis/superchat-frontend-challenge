@@ -13,6 +13,7 @@ import {
 import { Rating, Skeleton } from "@material-ui/lab";
 import { useStyles } from "./styles";
 import {
+  API_URL,
   getGithubData,
   getRepoContributors,
   IContributor,
@@ -93,7 +94,7 @@ export const CardPage: React.FC = () => {
               <img
                 alt="repository-icon"
                 className={classes.cardRepositoryIcon}
-                src={`http://localhost:5000${cardData.icon}`}
+                src={`${API_URL}${cardData.icon}`}
               />
             )}
             <div className={classes.cardRepositoryAuthor}>
