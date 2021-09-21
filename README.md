@@ -74,14 +74,14 @@ src/
 │   │   │   ├── CardPreview.tsx 
 │   │   │   ├── styles.ts 
 │   │   ├── FormComponent/  # Form component to receive data from user
-│   │   │   ├── FormComponent.tsx  # The model that will be returned in the response
+│   │   │   ├── FormComponent.tsx 
 │   │   │   ├── styles.ts 
 │   ├── pages/  # Rendering Pages
 │   │   ├── CardPage/ # Page to render each card
 │   │   │   ├── CardPage.tsx 
 │   │   │   ├── styles.ts 
 │   │   ├── LinkCreation/  # Page of creation new link
-│   │   │   ├── LinkCreation.tsx  # The model that will be returned in the response
+│   │   │   ├── LinkCreation.tsx  
 │   │   │   ├── styles.ts 
 │   └── App.tsx / #Root component
 │   └── App.css
@@ -105,7 +105,7 @@ src/
 
 ## 3. Default NPM commands
 
-The NPM commands below are already included with this template and can be used to quickly run, build and test your project.
+The NPM commands below are already included with this template and can be used to quickly run your project.
 
 ```sh
 # Start the application server using the ts-node
